@@ -36,15 +36,19 @@ def need_input():
             db.session.add(details)
             db.session.commit()
             data = details.query.filter_by(id=details.id).first()
-            
-        owner = result["owner"]
-        drivername= result['driverName']
-        email = result["email"]
-        mileage = mileage=result["mileage"]
-        company = result["company"]
 
-
-
+        if result["owner"]=="":
+            owner = result["driverName"]    
+            drivername= result['driverName']
+            email = result["email"]
+            mileage = mileage=result["mileage"]
+            company = result["company"]    
+        else:
+            owner = result["owner"]
+            drivername= result['driverName']
+            email = result["email"]
+            mileage = mileage=result["mileage"]
+            company = result["company"]        
         context = {
                 "owner":owner,
                 "driver":drivername,
@@ -53,7 +57,7 @@ def need_input():
                 "company":company,
             }
         return render_template('thanks.html',data = data, result=result,context=context)
-        
+
     except KeyError:
         return render_template("fourOwfour.html")
     
