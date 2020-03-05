@@ -27,10 +27,10 @@ def create_app(config_name):
     
 
     app.register_blueprint(main_blueprint)
-    with app.app_context():
-        from .main import views
-        db.create_all()
+    # with app.app_context():
+    #     from .main import views
+    #     db.create_all()
 
 
-        return app
+    return app
 
