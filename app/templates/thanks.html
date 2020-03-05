@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Store</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='narrow-jumbotron.css') }}" rel="stylesheet">
+  </head>
+
+
+
+
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills float-right">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Calltronix</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h1 class="display-3">Thank You</h1>
+        <p class="lead">I have received your Message.   
+        </p>
+      </div>
+      
+      <footer class="footer">
+        <p style="color: #fa755a">&copy; Calltronix 2020</p>
+      </footer>
+
+    </div> 
+
+
+
+    <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Email</th>
+      <th scope="col">Driver name</th>
+      <th scope="col">Mileage</th>
+      <th scope="col">Owner</th>
+      <th scope="col">Company</th>
+      <!-- <th scope="col"></th>
+      <th scope="col">Engn No</th>
+      <th scope="col">Engn No</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>{{context.email}}</td>
+      <td>{{context.driver}}</td>
+      <td>{{context.mileage}}</td>
+      <td>{{context.owner}}</td>
+      <td>{{context.company}}</td>
+    </tr>
+    
+
+  </tbody>
+</table>
+
+<!-- <table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table> -->
+
+
+  </body>
+</html>
+
+
+
