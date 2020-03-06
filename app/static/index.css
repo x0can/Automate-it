@@ -28,64 +28,7 @@
 
 
   /* body */
-body {
-  width: 100%;
-  min-height: 100vh;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin: 0;
-  padding: 0;
-
-  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-
-/* section */
-section {
-  width: 50%;
-  min-height: inherit;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  position: relative;
-}
-
-section::before,
-section::after {
-  content: "";
-  display: block;
-
-  border-radius: 100%;
-
-  position: absolute;
-}
-
-section::before {
-  width: 30px;
-  height: 30px;
-
-  background: var(--primary);
-  clip-path: polygon(0 100%, 100% 0, 100% 100%);
-
-  top: 18px;
-  left: 18px;
-}
-
-section::after {
-  width: 42px;
-  height: 42px;
-
-  border: 1px solid var(--primary);
-
-  top: 11px;
-  left: 11px;
-}
 
 .light {
   --primary: hsl(250, 100%, 44%);
