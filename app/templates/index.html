@@ -28,20 +28,33 @@
 
 
 
-
 <body style="background-color: rgb(6, 6, 44);"> 
   <html>
   
     <div class="container" style="font-size: 15px">
       
-    <div class=""> 
+    <div class="dark"> 
     <div class="header clearfix white-text">
       <nav class="jumbotron bg-dark mt-5" >
           <ul class="nav nav-pills">
             <li class="nav-item">
               <a class="nav-link active" href="#">Is the driver the owner of the vehicle? <br>
-            <span class="form-control"><input type="radio" onclick="javascript:yesnoCheck();" required name="yesno"  id="yesCheck"  value="yesCheck"/> Yes</span>
-             <span class="form-control"><input type="radio" onclick="javascript:yesnoCheck();" required name="yesno" id="noCheck"/ value="noCheck">  No</span> 
+            
+ <label>
+   <input type="radio" style="position: absolute;left: 50%;top: 50%;opacity: 0;transform: translate(-50%,-50%);z-index: -1;" onclick="javascript:yesnoCheck();" required name="yesno"  id="yesCheck"  value="yesCheck">
+   <span class="design"></span>
+   <span class="text">Yes</span>
+ </label>
+
+ <label>
+   <input type="radio" style="position: absolute;left: 50%;top: 50%;opacity: 0;transform: translate(-50%,-50%);z-index: -1;" onclick="javascript:yesnoCheck();" required name="yesno" id="noCheck"/ value="noCheck">
+   <span class="design"></span>
+   <span class="text">No</span>
+ </label>
+
+ <div id="ifNo" style="display:none">
+
+ </div>
             </a>  
           </li>
           </ul>
@@ -52,7 +65,7 @@
       </div>
     </div>
 
-     <div style="box-shadow: 2px 15px 10px black; " class="Element">
+     <div  class="dark">
      <form action="/post_field" method="POST" >
           
           <input type="text" class="form-control"  name="driverName" required id="driverName" placeholder=" Name of the driver (Full names)"/><hr>
@@ -78,7 +91,7 @@
           <input type="text" class="form-control" placeholder="What is the vehicle's Mileage" required name="mileage" id="mileage"/> <br>
           
          
-          <input type="submit" class="form-control btn btn-primary" id="submit" value="Press Me!"/> <br>
+          <input type="submit" class="form-control btn btn-dark col-md-4 light" id="submit" value="Press Me!"/>
           <div id="ifNo" style="display:none">
 
           </div>

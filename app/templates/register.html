@@ -6,6 +6,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
     <link href="{{ url_for('static', filename='narrow-jumbotron.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 
     <style>
 
@@ -25,12 +26,13 @@
    
 
  
+<section class="dark">
     <form action="/register" method="POST">
         <h1 style="color: aliceblue;">Sign up</h1><br/>
         {% if message %}
         <h2 style="color: yellow;">{{message}}</h2>
         {% endif %}
-    <input type="text" placeholder="username" name="username" style="color: aliceblue;" id="username" title="Format: Xx[space]Xx (e.g. Alex Cican)" autofocus autocomplete="off" required pattern="^\w+\s\w+$">
+    <input type="text" placeholder="username" name="username" style="color: aliceblue;" id="username" title="Format: (e.g. Alex Cican)" autofocus autocomplete="off" required pattern="^\w+\s\w+$">
     <input type="email",placeholder="email here" style="color: aliceblue;" name="email" id="email">
 
     <select name="" onchange="myFunction(event)">
@@ -48,9 +50,10 @@
 
 
     <input type="hidden" placeholder="roles" name="roles" id="roles">
-    <input type="submit" class="form-control btn btn-dark col-md-4" id="submit" class="icon-arrow-right" value="Login"/>
+    <input type="submit" class="form-control btn btn-dark col-md-4 light" id="submit" value="Register"/>
     <a href="/login">Already have an account</a>
     </form>
+</section>
  
 
 
