@@ -1,10 +1,103 @@
 # import requests,json
 from flask import Flask, jsonify, render_template, redirect, url_for,request
 from .import main
-from app.models import Detail,User,Role
+from app.models import Detail,User
 from ..import db
 import datetime
-from flask_user import current_user, login_required, roles_required, UserManager, UserMixin
+from flask_login import login_required
+# from flask import LoginManager
+
+# from flask_user import current_user, login_required, roles_required, UserManager, UserMixin
+from functools import wraps
+
+
+
+# auth = HTTPBasicAuth()
+newCustomer=[];
+
+# def restricted(access_level):
+#     def decorator(func):
+#         @wraps(func)
+#         def wrapper(*args, **kwargs):
+#             print(access_level)
+
+#             return func(*args, **kwargs)
+#         return wrapper
+#     return decorator        
+    
+
+
+
+
+
+
+
+
+@main.route("/", methods=["GET"])
+def index():
+    return redirect('/register')
+
+
+
+@main.route("/get_user", methods=["GET", "POST"])
+def get_role():
+    
+    result_user = request.form.to_dict(flat=False)
+    result_user = {
+            key: value[0] if len(value)== 1 else value
+            for key, value in request.form.items()
+        }
+
+    print(result_user)
+    if result_user["roles"]=="attendant":
+        return redirect('/attendant')            
+    else:
+        return redirect('/mechanic')
+
+
+@main.route("/register", methods=["GET","POST"])
+def register_user():
+
+    try:
+        result = request.form.to_dict(flat=False)
+        result = {
+                key: value[0] if len(value)== 10 else value
+                for key, value in request.form.items()
+            }
+
+        if result["username"]== "" or result["email"]=="" or result["password"]=="" or result["confirmPassword"]!=result["password"]:
+            message = "missing fields, please fill all the fields"
+            
+            return render_template("register.html",message=message)    
+       
+        if User.query.filter_by(email=result["email"]).first():
+            message="email already exists"
+            return render_template("register.html",message=message)
+        else:
+            user=User(username=result["username"],email=result["email"],pass_secure=result["password"],roles=result["roles"])
+            db.session.add(user)
+            db.session.commit()
+
+            if user.roles=="attendant":
+                return redirect("/attendant")
+             
+            return redirect("/mechanic")
+            
+        return render_template("register.html")
+
+    
+    except KeyError:
+        return render_template("register.html")
+
+    else:
+        return render_template("register.html")
+   
+
+
+@main.route("/login",methods=["GET", "POST"])
+def login_user():
+
+    return render_template("login.html") 
 
 
 @main.route("/post_field", methods=["GET", "POST"])
@@ -13,9 +106,10 @@ def need_input():
     try:
         result = request.form.to_dict(flat=False)
         result = {
-            key: value[0] if len(value)== 1 else value
+            key: value[0] if len(value)== 10 else value
             for key, value in request.form.items()
         }
+        newCustomer.append(result)
 
         if result['owner']=="":
             result['owner']==result['driverName']
@@ -57,24 +151,37 @@ def need_input():
                 "company":company,
             }
         return render_template('thanks.html',data = data, result=result,context=context)
-
     except KeyError:
         return render_template("fourOwfour.html")
+
+
+
+@main.route("/attendant", methods=["GET","POST"])
+# @login_required
+def driver_information():
+    return render_template("index.html")
+
+@main.route("/mechanic", methods=["GET","POST"])
+def make_vehicle():
+    while len(newCustomer)>0:
+        message="You are needed, there is a new customer"
+        model=Detail.query.filter_by(mod=Detail.model).first()
+        plate=Detail.query.filter_by(pla=Detail.reg_no).first()
+        otherVehicles=Detail.query.all()[1::10]
+        allVehicles=Detail.query.filter_by(mod=Detail.model).all()
+
+        context={
+                "message":message,
+                "model":model,
+                "plate":plate,
+                "otherVehicles":otherVehicles,
+                "allVehicles":allVehicles,
+            }
+        return render_template('mechanic.html',context=context)
+
+
     
+   
 
 
-
-
-
-
-@main.route("/", methods=["GET"])
-def get_form():
-  
-    return render_template('index.html')
-
-# @main.route('/',methods=['GET'])
-# def create_user():
-#     username = request.args.get('user')
-#     email = redirect.args.get('email')
-#     if username and email:
-#         new_user = User(username=username,email=email,role=)    
+        
