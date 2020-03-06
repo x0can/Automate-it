@@ -41,18 +41,30 @@ def index():
 
 @main.route("/get_user", methods=["GET", "POST"])
 def get_role():
-    
+
+
+    user = User.query.filter_by(email=User.email).first()    
     result_user = request.form.to_dict(flat=False)
     result_user = {
             key: value[0] if len(value)== 1 else value
             for key, value in request.form.items()
         }
-
-    print(result_user)
-    if result_user["roles"]=="attendant":
-        return redirect('/attendant')            
+    if user.email==result_user["email"]:
+        if user.roles=="attendant":
+            return redirect("/attendant")
+        if user.roles=="mechanic":
+            return redirect("/mechanic")
+        else:
+            return render_template("fourOwfour.html")            
     else:
-        return redirect('/mechanic')
+        message="Invalid credentials"
+        return render_template("register.html",message=message)
+
+    # print(result_user)
+    # if result_user["roles"]=="attendant":
+    #     return redirect('/attendant')            
+    # else:
+    #     return redirect('/mechanic')
 
 
 @main.route("/register", methods=["GET","POST"])
@@ -169,7 +181,7 @@ def make_vehicle():
         plate=Detail.query.filter_by(pla=Detail.reg_no).first()
         otherVehicles=Detail.query.all()[1::10]
         allVehicles=Detail.query.filter_by(mod=Detail.model).all()
-
+        
         context={
                 "message":message,
                 "model":model,
@@ -178,7 +190,8 @@ def make_vehicle():
                 "allVehicles":allVehicles,
             }
         return render_template('mechanic.html',context=context)
-
+        break
+    return render_template("mechanic.html")    
 
     
    
