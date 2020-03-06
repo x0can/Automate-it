@@ -96,8 +96,8 @@ def register_user():
 
             if user.roles=="attendant":
                 return redirect("/attendant")
-             
-            return redirect("/mechanic")
+            if user.roles=="mechanic": 
+                return redirect("/mechanic")
             
         return render_template("register.html")
 
@@ -179,22 +179,22 @@ def driver_information():
 
 @main.route("/mechanic", methods=["GET","POST"])
 def make_vehicle():
-    while len(newCustomer)>0:
-        message="You are needed, there is a new customer"
-        model=Detail.query.filter_by(mod=Detail.model).first()
-        plate=Detail.query.filter_by(pla=Detail.reg_no).first()
-        otherVehicles=Detail.query.all()[1::10]
-        allVehicles=Detail.query.filter_by(mod=Detail.model).all()
+    # while len(newCustomer)>0:
+    #     message="You are needed, there is a new customer"
+    #     model=Detail.query.filter_by(mod=Detail.model).first()
+    #     plate=Detail.query.filter_by(pla=Detail.reg_no).first()
+    #     otherVehicles=Detail.query.all()[1::10]
+    #     allVehicles=Detail.query.filter_by(mod=Detail.model).all()
         
-        context={
-                "message":message,
-                "model":model,
-                "plate":plate,
-                "otherVehicles":otherVehicles,
-                "allVehicles":allVehicles,
-            }
-        return render_template('mechanic.html',context=context)
-        break
+    #     context={
+    #             "message":message,
+    #             "model":model,
+    #             "plate":plate,
+    #             "otherVehicles":otherVehicles,
+    #             "allVehicles":allVehicles,
+    #         }
+    #     return render_template('mechanic.html',context=context)
+    #     break
     return render_template("mechanic.html")    
 
     
