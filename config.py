@@ -20,7 +20,7 @@ class Config:
     # USER_EMAIL_SENDER_NAME = USER_APP_NAME
     # USER_EMAIL_SENDER_EMAIL = os.environ.get("USER_EMAIL_SENDER_EMAIL")
 
-
+    
 
 
 class ProdConfig(Config):

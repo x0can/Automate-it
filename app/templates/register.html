@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <style>
+
+     </style>
+
+</head>
+<body>
+
+    
+    
+<script src="{{ url_for('static', filename='roles.js') }}"> 
+</script>
+
+   
+
+    <form action="/register" method="POST">
+        <h1>Sign up</h1><br/>
+        {% if message %}
+        {{message}}
+        {% endif %}
+    <input type="text" placeholder="username" name="username" id="username" title="Format: Xx[space]Xx (e.g. Alex Cican)" autofocus autocomplete="off" required pattern="^\w+\s\w+$">
+    <input type="email",placeholder="email here" name="email" id="email">
+
+    <select name="" onchange="myFunction(event)">
+        <option disabled selected>Choose Type of Account</option>
+        <option value="attendant">attendant</option>
+        <option value="mechanic">mechanic</option>
+       
+    </select>
+
+    <input type="password" placeholder="password" name="password" id="password" title="Password min 8 characters. At least one UPPERCASE and one lowercase letter" required pattern="(?=^.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$">
+    <input type="password" placeholder="confirmPassword" name="confirmPassword" id="confirmPassword">
+    <span id="passwordMeter"></span>    
+    <!-- add logic later -->
+    
+
+
+    <input type="hidden" placeholder="roles" name="roles" id="roles">
+    <input type="submit" class="form-control btn btn-dark col-md-4" id="submit" class="icon-arrow-right" value="Login"/>
+    </form>
+
+
+    <script src="{{ url_for('static', filename='login.js') }}"></script>
+
+  
+
+
+
+</body>
+</html>

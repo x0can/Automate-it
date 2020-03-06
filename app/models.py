@@ -8,20 +8,13 @@ from flask_user import current_user, login_required, roles_required, UserManager
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
-
-    # User authentication information. The collation='NOCASE' is required
-    # to search case insensitively when USER_IFIND_MODE is 'nocase_collation'.
     email = db.Column(db.String(255), nullable=False, unique=True)
-    email_confirmed_at = db.Column(db.DateTime())
-    password = db.Column(db.String(255), nullable=False, server_default='')
+    pass_secure = db.Column(db.String(255), nullable=False, unique=True)
+    username = db.Column(db.String(100), nullable=False)
+    roles = db.Column(db.String(100), nullable=False)
+    authenticated = db.Column(db.Boolean, default=False)
+    
 
-        # User information
-    first_name = db.Column(db.String(100), nullable=False, server_default='')
-    last_name = db.Column(db.String(100), nullable=False, server_default='')
-
-        # Define the relationship to Role via UserRoles
-    roles = db.relationship('Role', secondary='user_roles')
 
     @property
     def password(self):
@@ -35,26 +28,21 @@ class User(db.Model, UserMixin):
     def verify_password(self,password):
         return check_password_hash(self.pass_secure,password)
 
+    def is_active(self):
+        """True, as all users are active."""
+        return True
 
+    def get_id(self):
+        """Return the email address to satisfy Flask-Login's requirements."""
+        return self.email
 
+    def is_authenticated(self):
+        """Return True if the user is authenticated."""
+        return self.authenticated
 
-
-
-class Role (db.Model):
-    __tablename__= 'roles'
-
-    id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(255))
-
-    def __repr__(self):
-        return f'User {self.name}'
-
-
-class UserRoles(db.Model):
-    __tablename__ = 'user_roles'
-    id = db.Column(db.Integer(), primary_key=True)
-    user_id = db.Column(db.Integer(), db.ForeignKey('users.id', ondelete='CASCADE'))
-    role_id = db.Column(db.Integer(), db.ForeignKey('roles.id', ondelete='CASCADE'))    
+    def is_anonymous(self):
+        """False, as anonymous users aren't supported."""
+        return False    
 
 
 class Detail(db.Model):
