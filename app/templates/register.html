@@ -16,9 +16,13 @@
     
 <script src="{{ url_for('static', filename='roles.js') }}"> 
 </script>
+    
+
+
 
    
 
+ 
     <form action="/register" method="POST">
         <h1 style="color: aliceblue;">Sign up</h1><br/>
         {% if message %}
@@ -45,9 +49,9 @@
     <input type="submit" class="form-control btn btn-dark col-md-4" id="submit" class="icon-arrow-right" value="Login"/>
     <a href="/login">Already have an account</a>
     </form>
+ 
 
 
-    <script src="{{ url_for('static', filename='login.js') }}"></script>
 
   
 

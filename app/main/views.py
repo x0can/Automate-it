@@ -49,16 +49,20 @@ def get_role():
             key: value[0] if len(value)== 1 else value
             for key, value in request.form.items()
         }
-    if user.email==result_user["email"]:
-        if user.roles=="attendant":
-            return redirect("/attendant")
-        if user.roles=="mechanic":
-            return redirect("/mechanic")
+    
+    if result_user["email"]=="":
+        return render_template("access.html")
+    else:        
+        if user.email==result_user["email"]:
+            if user.roles=="attendant":
+                return redirect("/attendant")
+            if user.roles=="mechanic":
+                return redirect("/mechanic")
+            else:
+                return render_template("fourOwfour.html")            
         else:
-            return render_template("fourOwfour.html")            
-    else:
-        message="Invalid credentials"
-        return render_template("register.html",message=message)
+            message="Invalid credentials"
+            return render_template("register.html",message=message)
 
     # print(result_user)
     # if result_user["roles"]=="attendant":
