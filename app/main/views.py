@@ -4,11 +4,12 @@ from .import main
 from app.models import Detail,User
 from ..import db
 import datetime
-from flask_login import login_required
+# from flask_login import login_required
 # from flask import LoginManager
 
 # from flask_user import current_user, login_required, roles_required, UserManager, UserMixin
 from functools import wraps
+from werkzeug.exceptions import abort
 
 
 
@@ -19,7 +20,7 @@ newCustomer=[];
 #     def decorator(func):
 #         @wraps(func)
 #         def wrapper(*args, **kwargs):
-#             print(access_level)
+#             access_level.get_role.session
 
 #             return func(*args, **kwargs)
 #         return wrapper
@@ -42,27 +43,47 @@ def index():
 @main.route("/get_user", methods=["GET", "POST"])
 def get_role():
 
-
-    user = User.query.filter_by(email=User.email).first()    
+    
     result_user = request.form.to_dict(flat=False)
     result_user = {
             key: value[0] if len(value)== 1 else value
             for key, value in request.form.items()
         }
+    email = result_user["email"]
+    password = result_user["password"]
+    username = result_user["username"]
+    user = User.query.filter_by(email=email).first()
+    print(user)
+    if user.email != email:
+        message = "Invalid credentials"
+        print(message)
+        return redirect("/login")
+    if user.roles=="attendant":
+        return redirect("/attendant")
+    if user.roles=="mechanic":
+        return redirect("/mechanic")
+    else:
+        return redirect("fourOwfour.html")
+
+        
+
+
+
+        
     
-    if result_user["email"]=="":
-        return render_template("access.html")
-    else:        
-        if user.email==result_user["email"]:
-            if user.roles=="attendant":
-                return redirect("/attendant")
-            if user.roles=="mechanic":
-                return redirect("/mechanic")
-            else:
-                return render_template("fourOwfour.html")            
-        else:
-            message="Invalid credentials"
-            return render_template("register.html",message=message)
+    # if result_user["email"]=="":
+    #     return render_template("access.html")
+    # else:        
+    #     if user.email==result_user["email"]:
+    #         if user.roles=="attendant":
+    #             return redirect("/attendant")
+    #         if user.roles=="mechanic":
+    #             return redirect("/mechanic")
+    #         else:
+    #             return render_template("fourOwfour.html")            
+    #     else:
+    #         message="Invalid credentials"
+    #         return render_template("register.html",message=message)
 
     # print(result_user)
     # if result_user["roles"]=="attendant":
@@ -81,16 +102,17 @@ def register_user():
                 for key, value in request.form.items()
             }
 
-        if result["username"]== "" or result["email"]=="" or result["password"]=="" or result["confirmPassword"]!=result["password"]:
+        if result["username"] is None or result["email"] is None or result["password"] is None or result["confirmPassword"]!=result["password"]:
             message = "missing fields, please fill all the fields"
             
             return render_template("register.html",message=message)    
        
-        if User.query.filter_by(email=result["email"]).first():
+        if User.query.filter_by(email=result["email"]).first() is not None:
             message="email already exists"
             return render_template("register.html",message=message)
         else:
             user=User(username=result["username"],email=result["email"],pass_secure=result["password"],roles=result["roles"])
+            user.hash_password(result["password"])
             db.session.add(user)
             db.session.commit()
 
@@ -112,7 +134,7 @@ def register_user():
 
 @main.route("/login",methods=["GET", "POST"])
 def login_user():
-
+    
     return render_template("login.html") 
 
 
@@ -179,22 +201,24 @@ def driver_information():
 
 @main.route("/mechanic", methods=["GET","POST"])
 def make_vehicle():
-    # while len(newCustomer)>0:
-    #     message="You are needed, there is a new customer"
-    #     model=Detail.query.filter_by(mod=Detail.model).first()
-    #     plate=Detail.query.filter_by(pla=Detail.reg_no).first()
-    #     otherVehicles=Detail.query.all()[1::10]
-    #     allVehicles=Detail.query.filter_by(mod=Detail.model).all()
+
+    while len(newCustomer)>0:
+        message="You are needed, there is a new customer"
+        model=Detail.query.filter_by(mod=Detail.model).first()
+        plate=Detail.query.filter_by(pla=Detail.reg_no).first()
+        otherVehicles=Detail.query.all()[1::10]
+        allVehicles=Detail.query.filter_by(mod=Detail.model).all()
         
-    #     context={
-    #             "message":message,
-    #             "model":model,
-    #             "plate":plate,
-    #             "otherVehicles":otherVehicles,
-    #             "allVehicles":allVehicles,
-    #         }
-    #     return render_template('mechanic.html',context=context)
-    #     break
+        context={
+                "message":message,
+                "model":model,
+                "plate":plate,
+                "otherVehicles":otherVehicles,
+                "allVehicles":allVehicles,
+            }
+        return redirect('/mechanic', message)
+        break
+
     return render_template("mechanic.html")    
 
     
