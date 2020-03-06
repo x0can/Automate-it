@@ -35,7 +35,7 @@ newCustomer=[];
 
 @main.route("/", methods=["GET"])
 def index():
-    return redirect('/register')
+    return redirect('/login')
 
 
 
