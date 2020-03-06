@@ -29,7 +29,7 @@
 
 
 
-<body style="background-color: rgb(6, 6, 44);" > 
+<body style="background-color: rgb(6, 6, 44); " > 
   <html >
     <section class="dark">
       
@@ -37,68 +37,72 @@
   
     <div class="container mt-5 dark"  style="font-size: 15px">
       
-    <div class="mt-5" style="margin-top: 10%;"> 
-    <div class="header clearfix white-text mt-5">
-      <a class="nav-link active"" href="#">Is the driver the owner of the vehicle? <br>
+      <div class="card-rows"  >
+          <div class="card" style="background-color: rgb(6, 6, 44); position: relative;"  > 
+            <div class="card-header mt-5" style="margin-top: 10%;" > 
+              <div class="header clearfix white-text mt-5">
+                <a class="nav-link active"" href="#">Is the driver the owner of the vehicle? <br>
+                      
+                  <label>
+                    <input type="radio" style="position: absolute;left: 50%;top: 50%;opacity: 0;transform: translate(-50%,-50%);z-index: -1;" onclick="javascript:yesnoCheck();" required name="yesno"  id="yesCheck"  value="yesCheck">
+                    <span class="design"></span>
+                    <span class="text">Yes</span>
+                  </label>
+                 
+                  <label>
+                    <input type="radio" style="position: absolute;left: 50%;top: 50%;opacity: 0;transform: translate(-50%,-50%);z-index: -1;" onclick="javascript:yesnoCheck();" required name="yesno" id="noCheck"/ value="noCheck">
+                    <span class="design"></span>
+                    <span class="text">No</span>
+                  </label>
+                 
+                  <div id="ifNo" style="display:none">
+                 
+                  </div>
+          
+          
+                
+                </div>
+              </div>
             
-        <label>
-          <input type="radio" style="position: absolute;left: 50%;top: 50%;opacity: 0;transform: translate(-50%,-50%);z-index: -1;" onclick="javascript:yesnoCheck();" required name="yesno"  id="yesCheck"  value="yesCheck">
-          <span class="design"></span>
-          <span class="text">Yes</span>
-        </label>
-       
-        <label>
-          <input type="radio" style="position: absolute;left: 50%;top: 50%;opacity: 0;transform: translate(-50%,-50%);z-index: -1;" onclick="javascript:yesnoCheck();" required name="yesno" id="noCheck"/ value="noCheck">
-          <span class="design"></span>
-          <span class="text">No</span>
-        </label>
-       
-        <div id="ifNo" style="display:none">
-       
-        </div>
-
-
-      
+          
+               <div  class="card-body">
+               <form action="/post_field" method="POST" >
+                    
+                    <input type="text" class="form-control"   name="driverName" required id="driverName" placeholder=" Name of the driver (Full names)"/><hr>
+                    
+                    <input type="number" class="form-control" placeholder=" Enter driver's phone no:"  name="driverNo" required id="driverNo"/><br>
+          
+                    <input type="email" class="form-control" placeholder="Billing Address or Owner Email:" required name="email" id="email"/> <br>
+          
+                    <input type="text" class="form-control" placeholder="Model of the vehicle" required name="model" id="model"> <br>
+                    
+                    <input type="text" class="form-control" placeholder="Company name" required name="company" id="company"/> <br>
+                    
+                    <div id="ifYes" style="display:none">
+                    <input type="text" placeholder="Owner of the vehicle (Full names)" class="form-control" name="owner" id="owner"/> <br>
+                    </div>
+                    
+          
+                    <input type="text" class="form-control" placeholder="Engine Number" required name="engNo" id="engNo"/> <br>
+          
+                    <input type="text" class="form-control" placeholder="Enter vehicle regestration number" required name="regNo" id="regNo"/> <br>
+            
+                    
+                    <input type="text" class="form-control" placeholder="What is the vehicle's Mileage" required name="mileage" id="mileage"/> <br>
+                    
+                   
+                    <input type="submit" class="form-control btn btn-dark col-md-4 light" id="submit" value="Press Me!"/>
+                    <div id="ifNo" style="display:none">
+          
+                    </div>
+                    </form> <hr> <hr>
+                    <footer class="footer">
+                  <p style="color: #fa755a">&copy; Calltronix 2020</p>
+                </footer>
+               </div>
+              
+          </div>
       </div>
-    </div>
-  
-
-     <div  class="">
-     <form action="/post_field" method="POST" >
-          
-          <input type="text" class="form-control"   name="driverName" required id="driverName" placeholder=" Name of the driver (Full names)"/><hr>
-          
-          <input type="number" class="form-control" placeholder=" Enter driver's phone no:"  name="driverNo" required id="driverNo"/><br>
-
-          <input type="email" class="form-control" placeholder="Billing Address or Owner Email:" required name="email" id="email"/> <br>
-
-          <input type="text" class="form-control" placeholder="Model of the vehicle" required name="model" id="model"> <br>
-          
-          <input type="text" class="form-control" placeholder="Company name" required name="company" id="company"/> <br>
-          
-          <div id="ifYes" style="display:none">
-          <input type="text" placeholder="Owner of the vehicle (Full names)" class="form-control" name="owner" id="owner"/> <br>
-          </div>
-          
-
-          <input type="text" class="form-control" placeholder="Engine Number" required name="engNo" id="engNo"/> <br>
-
-          <input type="text" class="form-control" placeholder="Enter vehicle regestration number" required name="regNo" id="regNo"/> <br>
-  
-          
-          <input type="text" class="form-control" placeholder="What is the vehicle's Mileage" required name="mileage" id="mileage"/> <br>
-          
-         
-          <input type="submit" class="form-control btn btn-dark col-md-4 light" id="submit" value="Press Me!"/>
-          <div id="ifNo" style="display:none">
-
-          </div>
-          </form> <hr> <hr>
-          <footer class="footer">
-        <p style="color: #fa755a">&copy; Calltronix 2020</p>
-      </footer>
-     </div>
-    
       
     </div>
     

@@ -128,10 +128,10 @@ label {
 
 
 /* checked state */
-input:checked+.design::before {
+/* input:checked+.design::before {
   opacity: 1;
   transform: scale(.6);
-}
+} */
 
 
 /* other states */
