@@ -28,7 +28,7 @@
     <form action="/register" method="POST">
         <h1 style="color: aliceblue;">Sign up</h1><br/>
         {% if message %}
-        {{message}}
+        <h2 style="color: yellow;">{{message}}</h2>
         {% endif %}
     <input type="text" placeholder="username" name="username" style="color: aliceblue;" id="username" title="Format: Xx[space]Xx (e.g. Alex Cican)" autofocus autocomplete="off" required pattern="^\w+\s\w+$">
     <input type="email",placeholder="email here" style="color: aliceblue;" name="email" id="email">
