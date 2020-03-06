@@ -192,7 +192,7 @@ def need_input():
                 "company":company,
             }
         return render_template('thanks.html',data = data, result=result,context=context)
-    except KeyError:
+    except KeyError or AttributeError:
         return render_template("fourOwfour.html")
 
 
