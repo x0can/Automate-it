@@ -326,7 +326,7 @@
   select {
     width: 100%;
     padding: 10px 15px;
-    border: 1px dashed blue;
+    border: 1px dashed  rgb(6, 6, 44);;
     border-radius: 4px;
     background-color:  rgb(17, 156, 47);;
  } 
