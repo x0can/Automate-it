@@ -54,17 +54,19 @@ def get_role():
     username = result_user["username"]
     user = User.query.filter_by(email=email).first()
     print(user)
-    if user.email != email:
-        message = "Invalid credentials"
-        print(message)
-        return redirect("/login")
-    if user.roles=="attendant":
-        return redirect("/attendant")
-    if user.roles=="mechanic":
-        return redirect("/mechanic")
-    else:
-        return redirect("fourOwfour.html")
-
+    try:
+        if user.email != email:
+            message = "Invalid credentials"
+            print(message)
+            return redirect("/login")
+        if user.roles=="attendant":
+            return redirect("/attendant")
+        if user.roles=="mechanic":
+            return redirect("/mechanic")
+        else:
+            return redirect("fourOwfour.html")
+    except AttributeError:
+        return ("fourOwfour.html")
         
 
 
@@ -124,7 +126,8 @@ def register_user():
         return render_template("register.html")
 
     
-    except KeyError:
+    except KeyError or AttributeError:
+        message="Account not valid"
         return render_template("register.html")
 
     else:

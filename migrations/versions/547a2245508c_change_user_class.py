@@ -1,8 +1,8 @@
-"""make changes to initial models
+"""change user class
 
-Revision ID: 386824c0aca7
+Revision ID: 547a2245508c
 Revises: 
-Create Date: 2020-03-06 08:45:57.357533
+Create Date: 2020-03-07 00:16:37.765944
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '386824c0aca7'
+revision = '547a2245508c'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -37,7 +37,6 @@ def upgrade():
     sa.Column('pass_secure', sa.String(length=255), nullable=False),
     sa.Column('username', sa.String(length=100), nullable=False),
     sa.Column('roles', sa.String(length=100), nullable=False),
-    sa.Column('authenticated', sa.Boolean(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('pass_secure')
