@@ -99,6 +99,7 @@ section::after {
 .dark {
   --primary: hsl(1, 100%, 68%);
   --other: hsl(0, 0%, 90%);
+  position: relative;
 
 }
 

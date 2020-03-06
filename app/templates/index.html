@@ -10,7 +10,7 @@
   <title>Store</title>
   <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> -->
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
 
   <!-- Bootstrap core CSS -->
   <!-- <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet"> -->
@@ -29,14 +29,14 @@
 
 
 
-<body style="background-color: rgb(6, 6, 44);"> 
-  <html>
+<body style="background-color: rgb(6, 6, 44);" > 
+  <html >
   
-    <div class="container" style="font-size: 15px">
+    <div class="container mt-5 dark"  style="font-size: 15px">
       
-    <div class="dark"> 
-    <div class="header clearfix white-text mt">
-      <a class="nav-link active mt-5" href="#">Is the driver the owner of the vehicle? <br>
+    <div class="mt-5" style="margin-top: 10%;"> 
+    <div class="header clearfix white-text mt-5">
+      <a class="nav-link active"" href="#">Is the driver the owner of the vehicle? <br>
             
         <label>
           <input type="radio" style="position: absolute;left: 50%;top: 50%;opacity: 0;transform: translate(-50%,-50%);z-index: -1;" onclick="javascript:yesnoCheck();" required name="yesno"  id="yesCheck"  value="yesCheck">
@@ -59,33 +59,33 @@
       </div>
     </div>
 
-     <div  class="dark">
+     <div  class="">
      <form action="/post_field" method="POST" >
           
-          <input type="text" class="form-control"  name="driverName" required id="driverName" placeholder=" Name of the driver (Full names)"/><hr>
+          <input type="text" class="form-control" style="position: relative;"  name="driverName" required id="driverName" placeholder=" Name of the driver (Full names)"/><hr>
           
-          <input type="number" class="form-control" placeholder=" Enter driver's phone no:"  name="driverNo" required id="driverNo"/><br>
+          <input type="number" class="form-control" placeholder=" Enter driver's phone no:" style="position: relative;" name="driverNo" required id="driverNo"/><br>
 
-          <input type="email" class="form-control" placeholder="Billing Address or Owner Email:" required name="email" id="email"/> <br>
+          <input type="email" class="form-control" placeholder="Billing Address or Owner Email:" style="position: relative;" required name="email" id="email"/> <br>
 
-          <input type="text" class="form-control" placeholder="Model of the vehicle" required name="model" id="model"> <br>
+          <input type="text" class="form-control" placeholder="Model of the vehicle" style="position: relative;" required name="model" id="model"> <br>
           
-          <input type="text" class="form-control" placeholder="Company name" required name="company" id="company"/> <br>
+          <input type="text" class="form-control" placeholder="Company name" style="position: relative;" required name="company" id="company"/> <br>
           
           <div id="ifYes" style="display:none">
-          <input type="text" placeholder="Owner of the vehicle (Full names)" class="form-control" name="owner" id="owner"/> <br>
+          <input type="text" placeholder="Owner of the vehicle (Full names)" style="position: relative;" class="form-control" name="owner" id="owner"/> <br>
           </div>
           
 
-          <input type="text" class="form-control" placeholder="Engine Number" required name="engNo" id="engNo"/> <br>
+          <input type="text" class="form-control" placeholder="Engine Number" style="position: relative;" required name="engNo" id="engNo"/> <br>
 
-          <input type="text" class="form-control" placeholder="Enter vehicle regestration number" required name="regNo" id="regNo"/> <br>
+          <input type="text" class="form-control" placeholder="Enter vehicle regestration number" style="position: relative;" required name="regNo" id="regNo"/> <br>
   
           
-          <input type="text" class="form-control" placeholder="What is the vehicle's Mileage" required name="mileage" id="mileage"/> <br>
+          <input type="text" class="form-control" placeholder="What is the vehicle's Mileage" style="position: relative;" required name="mileage" id="mileage"/> <br>
           
          
-          <input type="submit" class="form-control btn btn-dark col-md-4 light" id="submit" value="Press Me!"/>
+          <input type="submit" class="form-control btn btn-dark col-md-4 light" id="submit" style="position: relative;" value="Press Me!"/>
           <div id="ifNo" style="display:none">
 
           </div>
