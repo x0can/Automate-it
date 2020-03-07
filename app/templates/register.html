@@ -12,6 +12,7 @@
 
      </style>
 
+
 </head>
 <body style="background-color: rgb(6, 6, 44);">
 
@@ -22,64 +23,84 @@
     
 
 
-
    
 
  
 <section class="dark">
-    <form action="/register" method="POST">
-        <h1 style="color: aliceblue;">Sign up</h1><br/>
-        {% if message %}
-        <h2 style="color: yellow;">{{message}}</h2>
-        {% endif %}
-        <select name="" onchange="myFunction(event)">
-            <option disabled selected>Choose Type of Account</option>
-            <option value="attendant">attendant</option>
-            <option value="mechanic">mechanic</option>
-           
-        </select>
-  <label for="">
+    {% if message %}
+    <h2 style="color: yellow;">{{message}}</h2>
+    {% endif %}
+  <div class="card" style="background-color: rgb(6, 6, 44); box-shadow: 2px 2px 20px  rgb(6, 6, 44);">
+      <div class="card-body">
+        <form action="/register" method="POST" >
+            <h1 style="color: aliceblue;">Sign up</h1><br/>
+          <label for="">
+              <span class="text"> Choose Account Type</span>
+            <span>
+                <select name="" onchange="myFunction(event)" style="color: aliceblue;" required>
+                    <option value=""></option>
+                    <option value="attendant">attendant</option>
+                    <option value="mechanic">mechanic</option>
+                   
+                </select>
+            </span>
+
+        </label>
+      <label for="">
+        
+        <span class="text">Username</span>
+        <span class="">
+            <input type="text" class="form-control"  name="username" id="username" title="(e.g. Alex Mwaura)" autofocus autocomplete="off" required pattern="^\w+\s\w+$">
+        </span>
+      </label>
     
-    <span class="text">Username</span>
-    <span class="badge">
-        <input type="text" class="form-control"  name="username" style="color: aliceblue;" id="username" title="Format: Xx[space]Xx (e.g. Alex Cican)" autofocus autocomplete="off" required pattern="^\w+\s\w+$">
-    </span>
-  </label>
-<label for="">
-
-    <span class="text"> Email</span>
-    <span class="badge">
-        <input type="email"     class="form-control"  style="color: aliceblue;" name="email" id="email">
-
-    </span>
-</label>
-<label for="">
-
-    <span class="text">Password</span>
-    <span class="badge">
-        <input type="password" class="form-control"  name="password" id="password" style="color: aliceblue;" title="Password min 8 characters. At least one UPPERCASE and one lowercase letter" required pattern="(?=^.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$">
-
-    </span>
-</label>        
-
-<label for="">
-    <span class="text">Confirm Password</span>
-    <span class="badge">
-        <input type="password" class="form-control" name="confirmPassword" style="color: aliceblue;" id="confirmPassword">
-
-    </span>
-</label>   
-
-<!-- add logic later -->
+      <label for="email">
+        <div class="container">
+        <span class="text">Email</span>
+        <span class="" style="background-color: rgb(6, 6, 44);"><input type="email" class="form-control" required name="email" id="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" title="(e.g alexmwaura@gmail.com)"></span>
+        </div>
+     </label>   
     
+       
+     <label for="password">
+    
+        <span class="text" >Password</span>
+        <div class="container">
+        <span class="" style="background-color: rgb(6, 6, 44);" > <input  type="password"  class="form-control " name="password"  id="password" title="Password min 8 characters. At least one UPPERCASE and one lowercase letter" required pattern="(?=^.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"></span>
+      </div>
+     
+      </label>        
+    
+    
+      <label for="password">
+    
+        <span class="text" >Confirm Password</span>
+        <div class="container">
+        <span class=""> <input  type="password"  class="form-control " name="password2"  id="password2" title="Password min 8 characters. At least one UPPERCASE and one lowercase letter" required pattern="(?=^.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" onkeyup='check();' ></span>
+        <span id='message'></span>
+    </div>
+     
+      </label> 
+    
+    
+     
+    
+    
+    
+    
+    <!-- add logic later -->
+        
+    
+        <input type="hidden" class="form-control"  placeholder="roles" name="roles" id="roles">
+    
+    
+        <button type="submit" class="form-control btn btn-danger col-md-4" id="submit" class="icon-arrow-right" value="Register">Register</button>
+        <hr>
+        <a href="/">Already have an account</a>
+        </form>
+      </div>
 
-    <input type="hidden" class="form-control"  placeholder="roles" name="roles" id="roles">
-
-
-    <button type="submit" class="form-control btn btn-danger col-md-4" id="submit" class="icon-arrow-right" value="Register">Register</button>
-    <hr>
-    <a href="/login">Already have an account</a>
-    </form>
+  </div>
 </section>
  
 
@@ -93,6 +114,24 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
     
 
+<script>
+
+
+        
+    
+    var check = function() {
+  if (document.getElementById('password').value ==
+    document.getElementById('password2').value) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'matching';
+  } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'not matching';
+  }
+}
+
+
+         </script>
 
 
 </body>
