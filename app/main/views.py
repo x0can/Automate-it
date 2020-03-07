@@ -49,24 +49,29 @@ def get_role():
             key: value[0] if len(value)== 1 else value
             for key, value in request.form.items()
         }
+    
+
     email = result_user["email"]
     password = result_user["password"]
     username = result_user["username"]
     user = User.query.filter_by(email=email).first()
     print(user)
     try:
+
         if user.email != email:
             message = "Invalid credentials"
             print(message)
-            return redirect("/login")
+            return redirect("/login", message)
         if user.roles=="attendant":
             return redirect("/attendant")
         if user.roles=="mechanic":
             return redirect("/mechanic")
         else:
-            return render_template("fourOwfour.html")
+            message="You must be regestered this account is invalid"
+            return render_template("login.html", message=message)
     except AttributeError:
-        return render_template("fourOwfour.html")
+            message="You must be regestered this account is invalid"
+            return render_template("login.html",message=message)
         
 
 
