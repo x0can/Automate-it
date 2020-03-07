@@ -3,7 +3,9 @@ from flask import Flask, jsonify, render_template, redirect, url_for,request
 from .import main
 from app.models import Detail,User
 from ..import db
+import app
 import datetime
+
 # from flask_login import login_required
 # from flask import LoginManager
 
@@ -106,7 +108,7 @@ def register_user():
             return render_template("register.html",message=message)
         else:
             user=User(username=result["username"],email=result["email"],pass_secure=result["password"],roles=result["roles"])
-            user.hash_password(result["password"])
+            user.generate_hash(result["password"])
             db.session.add(user)
             db.session.commit()
 
@@ -129,24 +131,7 @@ def register_user():
 
 @main.route("/login",methods=["GET", "POST"])
 def login_user():
-# def encode_auth_token(self,user_id):
-    user_id=User.query.filter_by(id=User.id)
-    try:
-        payload = {
-            'exp':datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=5),
-            'iat':datetime.datetime.utcnow(),
-            'sub':user_id
-            }
-        body = jwt.encode(
-            payload,
-            main.config.get('SECRET_KEY'),
-                algorithm="HOUSE788CARDS"
-            )
-        print(body)
-        return body
-
-    except Exception as e:
-        print(e)    
+   
     
     return render_template("login.html") 
 
