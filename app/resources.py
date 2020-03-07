@@ -53,12 +53,17 @@ class UserLogin(Resource):
 
 
             return {
-                'message': 'Logged in as {}'.format(current_user.roles),
+                'status' : 'success',
+                'message': 'Logged in as {}'.format(current_user.username),
+                'role': '{}'.format(current_user.roles),
                 'access_token': access_token,
                 'refresh_token': refresh_token
             }
         else:
-            return{'message': 'Wrong credentials'}    
+            return{
+                'status': 'failed',
+                'message': 'Wrong credentials'
+            }    
 
         return data
       
@@ -70,25 +75,30 @@ class UserLogoutAccess(Resource):
         try:
             revoked_token = RevokeToken(tok=tok)
             revoked_token.add()
-            return {'message':'Access token has been revoked'}
+            return {
+                'status': 'logout',
+                'message':'Access token has been revoked'
+                }
 
         except:
-            return {'message': 'Something wen wrong'},500    
-        return {'message': 'User logout'}
+            return {'message': 'Something went wrong'},500    
+        # return {'message': 'User logout'}
       
       
 class UserLogoutRefresh(Resource):
     @jwt_refresh_token_required
     def post(self):
-        tok = get_raw_jwt()['tok']
+        tok = get_raw_jwt()['jti']
         try:
             revoked_token = RevokeToken(tok=tok)
             revoked_token.add()
-            return {'message': 'Refresh token has been revoked'}
+            return {
+                'status':'logout',
+                'message': 'Refresh token has been revoked'
+                }
         except:
             return {'message': 'Something went wrong'}, 500
 
-        return {'message': 'User logout'}
       
       
 class TokenRefresh(Resource):
@@ -99,9 +109,6 @@ class TokenRefresh(Resource):
         return{
             'access_token': access_token
         }
-
-
-
         return {'message': 'Token refresh'}
       
       
