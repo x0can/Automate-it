@@ -10,6 +10,7 @@ import datetime
 # from flask_user import current_user, login_required, roles_required, UserManager, UserMixin
 from functools import wraps
 from werkzeug.exceptions import abort
+import jwt
 
 
 
@@ -26,19 +27,9 @@ newCustomer=[];
 #         return wrapper
 #     return decorator        
     
-
-
-
-
-
-
-
-
 @main.route("/", methods=["GET"])
 def index():
     return redirect('/login')
-
-
 
 @main.route("/get_user", methods=["GET", "POST"])
 def get_role():
@@ -60,7 +51,7 @@ def get_role():
 
         if user.email != email:
             message = "Invalid credentials"
-            print(message)
+            # print(message)
             return redirect("/login", message)
         if user.roles=="attendant":
             return redirect("/attendant")
@@ -72,11 +63,7 @@ def get_role():
     except AttributeError:
             message="You must be regestered this account is invalid"
             return render_template("login.html",message=message)
-        
-
-
-
-        
+                
     
     # if result_user["email"]=="":
     #     return render_template("access.html")
@@ -142,6 +129,24 @@ def register_user():
 
 @main.route("/login",methods=["GET", "POST"])
 def login_user():
+# def encode_auth_token(self,user_id):
+    user_id=User.query.filter_by(id=User.id)
+    try:
+        payload = {
+            'exp':datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=5),
+            'iat':datetime.datetime.utcnow(),
+            'sub':user_id
+            }
+        body = jwt.encode(
+            payload,
+            main.config.get('SECRET_KEY'),
+                algorithm="HOUSE788CARDS"
+            )
+        print(body)
+        return body
+
+    except Exception as e:
+        print(e)    
     
     return render_template("login.html") 
 
@@ -199,6 +204,8 @@ def need_input():
         return render_template('thanks.html',data = data, result=result,context=context)
     except KeyError or AttributeError:
         return render_template("fourOwfour.html")
+
+
 
 
 

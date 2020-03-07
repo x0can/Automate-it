@@ -32,7 +32,8 @@
     <input type="password" placeholder="password" name="password" style="color: aliceblue;" id="password" title="Password min 8 characters. At least one UPPERCASE and one lowercase letter" required pattern="(?=^.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$">
 
     <!-- add logic later -->
-    <input type="submit" class="form-control btn btn-dark col-md-4" id="submit" value="Login"/>
+    
+    <a href="{{ url_for('main.login_user')}}"><input type="submit" class="form-control btn btn-dark col-md-4" id="submit" value="Login"/></a>
     <a href="/register"> Need an account?</a>
     </form>
 </section>

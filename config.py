@@ -5,7 +5,7 @@ class Config:
     '''
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://alexkhan:1234testWave@localhost/calltronix'
 
-    SECRET_KEY = '143i4rhfdjnfdnbfjfbjdgbjfsuruhnnmmnrwerenjjbbn'
+    SECRET_KEY = os.getenv('SECRET_KEY', 'tok_testone')
     DEBUG = True
     # MAIL_SERVER = 'smtp.googlemail.com'
     # MAIL_PORT = 587
