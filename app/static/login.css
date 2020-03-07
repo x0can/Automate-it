@@ -161,7 +161,12 @@
     right: -19.5em; 
     background: #fff;
   }
-  
+
+.badge{
+ 
+ background-color: rgb(6, 6, 44);
+ color:  rgb(6, 6, 44);
+}
   .placeholder {
     @include placeholder;
   }
@@ -231,38 +236,38 @@
   }
   
   .good:focus {
-    border-left-color: #87E696;
+    border-left-color:  rgb(6, 6, 44);
   }
   
   #passwordMeter.good:before {
-    background: #87E696;
+    background: rgb(6, 6, 44);
     width: 7.6em;
   }
   
   .better:focus {
-    border-left-color: #55D969;
+    border-left-color:  rgb(6, 6, 44);
   }
   
   #passwordMeter.better:before {
-    background: #55D969;
+    background:  rgb(6, 6, 44);
     width: 11.4em;
   }
   
   .strong:focus {
-    border-left-color: #3EC753;
+    border-left-color:  rgb(6, 6, 44);
   }
   
   #passwordMeter.strong:before {
-    background: #3EC753;
+    background:  rgb(6, 6, 44);
     width: 15.2em;
   }
   
   .military:focus {
-    border-color: #10AD27;
+    border-color: rgb(6, 6, 44);
   }
   
   #passwordMeter.military:before {
-    background: #10AD27;
+    background:  rgb(6, 6, 44);
     width: 19em;
   }
   
@@ -330,7 +335,7 @@
     padding: 10px 15px;
     border: 1px dashed  rgb(6, 6, 44);;
     border-radius: 4px;
-    background-color:  rgb(17, 156, 47);;
+    background-color:   rgb(6, 6, 44);
  } 
 
 
