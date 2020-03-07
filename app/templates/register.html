@@ -32,15 +32,17 @@
         {% if message %}
         <h2 style="color: yellow;">{{message}}</h2>
         {% endif %}
-    <input type="text" placeholder="username" name="username" style="color: aliceblue;" id="username" title="Format: (e.g. Alex Cican)" autofocus autocomplete="off" required pattern="^\w+\s\w+$">
+        <select name="" onchange="myFunction(event)">
+            <option disabled selected>Choose Type of Account</option>
+            <option value="attendant">attendant</option>
+            <option value="mechanic">mechanic</option>
+           
+        </select>
+        
+    <input type="text" placeholder="username" name="username" style="color: aliceblue;" id="username" title="Format: Xx[space]Xx (e.g. Alex Cican)" autofocus autocomplete="off" required pattern="^\w+\s\w+$">
     <input type="email",placeholder="email here" style="color: aliceblue;" name="email" id="email">
 
-    <select name="" onchange="myFunction(event)">
-        <option disabled selected>Choose Type of Account</option>
-        <option value="attendant">attendant</option>
-        <option value="mechanic">mechanic</option>
-       
-    </select>
+        
 
     <input type="password" placeholder="password" name="password" id="password" style="color: aliceblue;" title="Password min 8 characters. At least one UPPERCASE and one lowercase letter" required pattern="(?=^.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$">
     <input type="password" placeholder="Confirm Password" name="confirmPassword" style="color: aliceblue;" id="confirmPassword">
@@ -50,7 +52,7 @@
 
 
     <input type="hidden" placeholder="roles" name="roles" id="roles">
-    <input type="submit" class="form-control btn btn-dark col-md-4 light" id="submit" value="Register"/>
+    <input type="submit" class="form-control btn btn-dark col-md-4" id="submit" class="icon-arrow-right" value="Register"/>
     <a href="/login">Already have an account</a>
     </form>
 </section>

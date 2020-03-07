@@ -64,9 +64,9 @@ def get_role():
         if user.roles=="mechanic":
             return redirect("/mechanic")
         else:
-            return redirect("fourOwfour.html")
+            return render_template("fourOwfour.html")
     except AttributeError:
-        return ("fourOwfour.html")
+        return render_template("fourOwfour.html")
         
 
 
