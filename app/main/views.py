@@ -44,7 +44,7 @@ def get_role():
 
     email = result_user["email"]
     password = result_user["password"]
-    username = result_user["username"]
+    # username = result_user["username"]
     user = User.query.filter_by(email=email).first()
     print(user)
     try:
