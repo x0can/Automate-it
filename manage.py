@@ -13,7 +13,7 @@ from config import Config
 
 
 
-app = create_app("production")
+app = create_app("development")
 manager = Manager(app)
 manager.add_command("server",Server)
 jwt = JWTManager(app)

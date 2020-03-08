@@ -8,12 +8,12 @@ import datetime
 from functools import wraps
 from werkzeug.exceptions import abort
 import jwt
+from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required,
+jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
+from app.models import RevokeToken,Detail
 
 
-
-# auth = HTTPBasicAuth()
 newCustomer=[];
-
         
 @main.route("/", methods=["GET"])
 def index():
@@ -21,152 +21,85 @@ def index():
 
 @main.route("/get_user", methods=["GET", "POST"])
 def get_role():
-
-    url = "http://127.0.0.1:5000/login"
-
-    payload = "{\n    \"email\": \"john576@gmail.com\",\n    \"username\": \"John2 Doe\",\n    \"password\": \"JohnDo2e\",\n    \"role\": \"attendant\"\n}"
-    headers = {
-    'Content-Type': 'application/json'
-    }
-
-    response = requests.request("POST", url, headers=headers, data = payload)
-
-    return(response.text)
-
-
-
-    # try:
-    #     result_user = request.form.to_dict(flat=False)
-    #     result_user = {
-    #             key: value[0] if len(value)== 1 else value
-    #             for key, value in request.form.items()
-    #         }
-
-
-
-    # except:
-    #     pass        
-    # pass
-    # while result_user['email']==None:
-    #     return redirect('/')
-    #     break
-
-
-    # email = result_user["email"]
-    # password = result_user["password"]
-    # username = result_user["username"]
-    # user = User.query.filter_by(email=email).first()
-    # print(user)
-    # try:
-
-    #     if email or password is None:
-    #         message = "Invalid credentials"
-    #         # print(message)
-    #         return redirect("/welcome", message)
-    #     if user.roles=="attendant":
-    #         return redirect("/attendant")
-    #     if user.roles=="mechanic":
-    #         return redirect("/mechanic")
-    #     else:
-    #         message="You must be regestered this account is invalid"
-    #         return redirect("/welcome",message)
-    # except KeyError or AttributeError:
-    #         message="You must be regestered this account is invalid"
-    #         return redirect("/welcome",message)
+   
+    result = request.form.to_dict(flat=False)
+    result = {
+                    key: value[0] if len(value)== 10 else value
+                    for key, value in request.form.items()
+                }
                 
-    
-    # if result_user["email"]=="":
-    #     return render_template("access.html")
-    # else:        
-    #     if user.email==result_user["email"]:
-    #         if user.roles=="attendant":
-    #             return redirect("/attendant")
-    #         if user.roles=="mechanic":
-    #             return redirect("/mechanic")
-    #         else:
-    #             return render_template("fourOwfour.html")            
-    #     else:
-    #         message="Invalid credentials"
-    #         return render_template("register.html",message=message)
+    print(result)
+    try:
+        current_user = User.find_by_email(result['email'])
+        if not current_user:
+            message = 'User {} with email: {} doesn\t exist'.format(result['username'], result['email'])
+            return render_template('login.html',message=message)
 
-    # print(result_user)
-    # if result_user["roles"]=="attendant":
-    #     return redirect('/attendant')            
-    # else:
-    #     return redirect('/mechanic')
+        if User.verify_hash(result['password'],current_user.pass_secure):
+            
+            access_token = create_access_token(identity=result['email'])
+            refresh_token = create_refresh_token(identity=result['email'])
 
+            if current_user.roles=="attendant":
+                email=current_user.email
+                password=result['password']
+                message="Welcome {}".format(current_user.username)
+                return render_template('index.html',message=message, password=password,email=email)
 
-
-
-
+            message="Welcome {}".format(current_user.username)    
+            return render_template('mechanic.html',message=message)    
+        else:
+            message="Please check password"
+            return render_template('login.html',message=message)
+    except:
+        return render_template("authorize.html")
 
 
 
 @main.route("/register", methods=["GET","POST"])
-def register_user():
-    url = "https://automate-v1.herokuapp.com/registration"
-    payload = "{\n    \"email\": \"johndoe67@gmail.com\",\n    \"username\": \"John2 Doe\",\n    \"password\": \"JohnDo2e\",\n    \"role\": \"attendant\"\n}"
-    headers = {
-    'Content-Type': 'application/json'
-    }
-
-    response = requests.request("POST", url, headers=headers, data = payload)
-
+def register_user():    
+    
     result = request.form.to_dict(flat=False)
     result = {
-            key: value[0] if len(value)== 10 else value
-            for key, value in request.form.items()
-        }
-    print(result)    
+                    key: value[0] if len(value)== 10 else value
+                    for key, value in request.form.items()
+                }
+    print(result)
+    try:
+        if User.find_by_email(result['email']):
+            message='user {} already exists'.format(result['email'])
+            return render_template("register.html", message=message)
+        new_user = User(
+            username = result['username'],
+            pass_secure = User.generate_hash(result['password']),
+            email = result['email'],
+            roles=result['roles']
+        )
+        try:
+            new_user.save_to_db()
+            access_token = create_access_token(identity=result['email'])
+            refresh_token = create_refresh_token(identity=result['email'])
 
+            if result['roles']=='attendant':
+                return redirect("index.html")
+            elif result['roles']!="attendant" and result['roles'] != "mechanic":
+                return render_template("fourOwfour.html")
+            else:
+                return render_template("mechanic.html")       
+        except:
+            pass
+    except:
+        pass
 
     return render_template("register.html")
-
-
-    # return (response.text)
-
-    # try:
-    #     result = request.form.to_dict(flat=False)
-    #     result = {
-    #             key: value[0] if len(value)== 10 else value
-    #             for key, value in request.form.items()
-    #         }
-
-    #     if result["username"] is None or result["email"] is None or result["password"] is None or result["confirmPassword"]!=result["password"]:
-    #         message = "missing fields, please fill all the fields"
-            
-    #         return redirect("/",message)    
-       
-        # if User.query.filter_by(email=result["email"]).first() is not None:
-        #     message="email already exists"
-        #     return render_template("register.html",message=message)
-        # else:
-        #     user=User(username=result["username"],email=result["email"],pass_secure=result["password"],roles=result["roles"])
-        #     user.generate_hash(result["password"])
-        #     db.session.add(user)
-        #     db.session.commit()
-
-        #     if user.roles=="attendant":
-        #         return redirect("/attendant")
-        #     if user.roles=="mechanic": 
-        #         return redirect("/mechanic")
-            
-        # return render_template("register.html")
-
     
-    # except KeyError or AttributeError:
-    #     message="Account not valid"
-    #     return render_template("register.html")
 
-    # else:
-    #     return render_template("register.html")
-   
-
-
+@main.route('/error_registration', methods=['GET','POST'])
+def error_regestration():
+    message="email already exists"    
+    pass
 @main.route("/welcome",methods=["GET", "POST"])
 def login_user():
-   
-    
     return render_template("login.html") 
 
 
@@ -229,8 +162,17 @@ def need_input():
 
 
 @main.route("/attendant", methods=["GET","POST"])
+@jwt_refresh_token_required
 def driver_information():
-    return render_template("index.html")
+    current_user =get_jwt_identity()
+    print(current_user)
+    access_token=create_access_token(identity=current_user)
+    # message = "Hello {}".format(email)
+    # return render_template("index.html")
+    return{
+            'access_token': access_token
+        }
+    return {'message': 'Token refresh'}
 
 @main.route("/mechanic", methods=["GET","POST"])
 def make_vehicle():
@@ -249,7 +191,7 @@ def make_vehicle():
                 "otherVehicles":otherVehicles,
                 "allVehicles":allVehicles,
             }
-        return redirect('/mechanic', message)
+        return render_template("mechanic.html")
         break
 
     return render_template("mechanic.html")    

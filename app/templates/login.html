@@ -8,9 +8,26 @@
     <link href="{{ url_for('static', filename='narrow-jumbotron.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 
-    <style>
+ <script>
 
-     </style>
+// var myHeaders = new Headers();
+// myHeaders.append("Content-Type", "application/json");
+
+// var raw = JSON.stringify({"email":"alexmwaura2015@gmail.com","password":"Alextest"});
+
+// var requestOptions = {
+//   method: 'POST',
+//   headers: myHeaders,
+//   body: raw,
+//   redirect: 'follow'
+// };
+
+// fetch("http://127.0.0.1:5000/login", requestOptions)
+//   .then(response => response.text())
+//   .then(result => console.log(result))
+//   .catch(error => console.log('error', error));
+
+ </script>
 
 
 </head>
@@ -22,9 +39,7 @@
 </script>>
 
 <section class="dark">
-  {% if message %}
-          <h2 style="color: yellow;">{{message}}</h2>
-          {% endif %}
+
   
         
     <div class="card" style="background-color: rgb(6, 6, 44); box-shadow: 2px 2px 20px  rgb(6, 6, 44);">
@@ -33,6 +48,14 @@
       <div class="card-body">
         <form action="/get_user" method="POST">
           <h1 style="color: aliceblue;">Login</h1><br/>
+          {% if message %}
+          <label for="">
+              <span class="text" style="color: goldenrod;">{{message}}</span>
+              <span>
+                  <hr><hr>     
+              </span>
+          </label>
+          {% endif %}
           
   
      <!-- <input type="text" placeholder="username" name="username" style="color: aliceblue;" id="username" title="Format: Xx[space]Xx (e.g. Alex Cican)" autofocus autocomplete="off" required pattern="^\w+\s\w+$">  -->

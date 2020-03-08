@@ -27,13 +27,19 @@
 
  
 <section class="dark">
-    {% if message %}
-    <h2 style="color: yellow;">{{message}}</h2>
-    {% endif %}
+  
   <div class="card" style="background-color: rgb(6, 6, 44); box-shadow: 2px 2px 20px  rgb(6, 6, 44);">
       <div class="card-body">
-        <form action="/register" method="POST" >
+        <form action="/register" method="POST">
             <h1 style="color: aliceblue;">Sign up</h1><br/>
+            {% if message %}
+            <label for="">
+                <span class="text" style="color: goldenrod;">{{message}}</span>
+                <span>
+                    <hr><hr>     
+                </span>
+            </label>
+            {% endif %}
           <label for="">
               <span class="text"> Choose Account Type</span>
             <span>

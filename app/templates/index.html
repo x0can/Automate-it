@@ -46,7 +46,6 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
 
 
-
  </head>
 
 
@@ -64,7 +63,11 @@
           <div class="card" style="background-color: rgb(6, 6, 44); position: relative;"  > 
             <div class="card-header mt-5" style="margin-top: 10%;" > 
               <div class="header clearfix white-text mt-5">
-                <a class="nav-link active"" href="#">Is the driver the owner of the vehicle? <br>
+                <a class="nav-link active"" href="#">Is the driver the owner of the vehicle?
+                  
+                  
+                  {{refresh_token}}
+                  <br>
                       
                   <label>
                     <input type="radio" style="position: absolute;left: 50%;top: 50%;opacity: 0;transform: translate(-50%,-50%);z-index: -1;" onclick="javascript:yesnoCheck();" required name="yesno"  id="yesCheck"  value="yesCheck">
@@ -111,7 +114,9 @@
                     
                     <input type="text" class="form-control" placeholder="What is the vehicle's Mileage" required name="mileage" id="mileage"/> <br>
                     
-                   
+                   <input type="hidden"  value="{{email}}" name="useremail" id="useremail">
+                   <input type="hidden" value="{{password}}" name="password" id="password">
+
                     <input type="submit" class="form-control btn btn-dark col-md-4 light" id="submit" value="Press Me!"/> 
                     
                     </form> 
@@ -139,6 +144,24 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="js/jquery-3.4.1.js"></script>
   <script src="js/scripts.js"></script>
+
+
+
+  <script>
+
+    if (document.getElementById('useremail')){
+      alert(`Welcome ${document.getElementById('useremail').value}`)
+        // window.location = "/attendant"
+      // console.log('success')
+    }else{
+      window.location = "/"
+    }
+    
+    
+    
+      
+    </script>
+
 
 </body>
 
