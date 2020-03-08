@@ -45,9 +45,9 @@ def get_role():
                 password=result['password']
                 message="Welcome {}".format(current_user.username)
                 return render_template('index.html',message=message, password=password,email=email)
-
-            message="Welcome {}".format(current_user.username)    
-            return render_template('mechanic.html',message=message)    
+            else:
+                message="Welcome {}".format(current_user.username)    
+                return render_template('mechanic.html',message=message)    
         else:
             message="Please check password"
             return render_template('login.html',message=message)
