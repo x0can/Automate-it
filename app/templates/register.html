@@ -7,11 +7,47 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
     <link href="{{ url_for('static', filename='narrow-jumbotron.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+  
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      
+    <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}"> -->
+    <link href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/css/bootstrap.min.css.map') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/css/now-ui-dashboard.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/css/now-ui-dashboard.min') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='demo/demo.css') }}" rel="stylesheet">
+  
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='narrow-jumbotron.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 
-    <style>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-     </style>
-
+  <script type="text/javascript" src="{{ url_for('static', filename='owner.js') }}"></script>
+  
+  <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+  
 
 </head>
 <body style="background-color: rgb(6, 6, 44);">
@@ -40,21 +76,21 @@
                 </span>
             </label>
             {% endif %}
-          <label for="">
+          <label for="options"  >
               <span class="text"> Choose Account Type</span>
-            <span>
-                <select name="" onchange="myFunction(event)" style="color: aliceblue;" required>
-                    <option value=""></option>
-                    <option value="attendant">attendant</option>
-                    <option value="mechanic">mechanic</option>
+            <span style="cursor: pointer;">
+                <select name="options" id="options"  onchange="myFunction(event)" style="color: aliceblue;" required style="cursor: pointer;">
+                    <option  value=""></option>
+                    <option name="options"  value="attendant">attendant</option>
+                    <option name="options" value="mechanic">mechanic</option>
                    
                 </select>
             </span>
 
-        </label>
-      <label for="">
+        </label> <hr>
+      <label for="username">
         
-        <span class="text">Username</span>
+        <span class="text">Username</span>&nbsp;&nbsp;
         <span class="">
             <input type="text" class="form-control"  name="username" id="username" title="(e.g. Alex Mwaura)" autofocus autocomplete="off" required pattern="^\w+\s\w+$">
         </span>
@@ -78,7 +114,7 @@
       </label>        
     
     
-      <label for="password">
+      <label for="password2">
     
         <span class="text" >Confirm Password</span>
         <div class="container">
@@ -93,14 +129,12 @@
     
     
     
-    
-    <!-- add logic later -->
         
     
         <input type="hidden" class="form-control"  placeholder="roles" name="roles" id="roles">
     
     
-        <input type="submit" class="form-control btn btn-danger" id="submit" class="icon-arrow-right" value="Register">
+        <input type="submit" class="form-control btn btn-success" id="submit" class="icon-arrow-right" value="Register">
         <hr>
         <a href="/">Already have an account</a>
         </form>
@@ -113,10 +147,6 @@
 
 
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->        <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
     
 

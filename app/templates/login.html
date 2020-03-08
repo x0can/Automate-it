@@ -8,26 +8,45 @@
     <link href="{{ url_for('static', filename='narrow-jumbotron.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 
- <script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
 
-// var myHeaders = new Headers();
-// myHeaders.append("Content-Type", "application/json");
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    
+  <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-// var raw = JSON.stringify({"email":"alexmwaura2015@gmail.com","password":"Alextest"});
 
-// var requestOptions = {
-//   method: 'POST',
-//   headers: myHeaders,
-//   body: raw,
-//   redirect: 'follow'
-// };
+  <!-- Bootstrap core CSS -->
+  <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}"> -->
+  <link href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/css/bootstrap.min.css.map') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/css/now-ui-dashboard.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/css/now-ui-dashboard.min') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/css/styles.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='demo/demo.css') }}" rel="stylesheet">
 
-// fetch("http://127.0.0.1:5000/login", requestOptions)
-//   .then(response => response.text())
-//   .then(result => console.log(result))
-//   .catch(error => console.log('error', error));
+  <!-- Custom styles for this template -->
+  <link href="{{ url_for('static', filename='narrow-jumbotron.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 
- </script>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script><script type="text/javascript" src="{{ url_for('static', filename='owner.js') }}"></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+
 
 
 </head>
@@ -36,7 +55,7 @@
     
     
 <script src="{{ url_for('static', filename='roles.js') }}"> 
-</script>>
+</script>
 
 <section class="dark">
 
@@ -49,7 +68,7 @@
         <form action="/get_user" method="POST">
           <h1 style="color: aliceblue;">Login</h1><br/>
           {% if message %}
-          <label for="">
+          <label for="password">
               <span class="text" style="color: goldenrod;">{{message}}</span>
               <span>
                   <hr><hr>     
@@ -58,7 +77,6 @@
           {% endif %}
           
   
-     <!-- <input type="text" placeholder="username" name="username" style="color: aliceblue;" id="username" title="Format: Xx[space]Xx (e.g. Alex Cican)" autofocus autocomplete="off" required pattern="^\w+\s\w+$">  -->
         <label for="email">
           <div class="container">
           <span class="text">Email</span>
@@ -77,11 +95,10 @@
         </label> 
      
   
-      <!-- add logic later -->
       
        <a href="{{ url_for('main.login_user')}}" class="">
           
-          <input  type="submit" class="form-control btn btn-primary" id="submit" value="Login"><hr>
+          <input  type="submit" class="form-control btn btn-success" id="submit" value="Login"><hr>
       
       
       </a>
@@ -107,7 +124,6 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->        <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
     
   

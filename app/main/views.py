@@ -52,7 +52,8 @@ def get_role():
             message="Please check password"
             return render_template('login.html',message=message)
     except:
-        return render_template("authorize.html")
+        message="This account is not authorized"
+        return render_template("login.html", message=message)
 
 
 
@@ -159,7 +160,7 @@ def need_input():
     except KeyError or AttributeError:
         return render_template("fourOwfour.html")
 
-
+ 
 
 
 

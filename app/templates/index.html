@@ -37,7 +37,6 @@
   <!-- Custom styles for this template -->
   <link href="{{ url_for('static', filename='narrow-jumbotron.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
-</head>
 <script type="text/javascript" src="{{ url_for('static', filename='owner.js') }}"></script>
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
@@ -60,15 +59,12 @@
     <div class="container mt-5 dark"  style="font-size: 15px">
       
       <div class="card-rows"  >
-          <div class="card" style="background-color: rgb(6, 6, 44); position: relative;"  > 
+          <div class="card" style="background-color: rgb(6, 6, 44); position: relative; box-shadow: 2px 2px 20px  rgb(6, 6, 44);"  > 
             <div class="card-header mt-5" style="margin-top: 10%;" > 
               <div class="header clearfix white-text mt-5">
                 <a class="nav-link active"" href="#">Is the driver the owner of the vehicle?
-                  
-                  
-                  {{refresh_token}}
                   <br>
-                      
+                      <hr>
                   <label>
                     <input type="radio" style="position: absolute;left: 50%;top: 50%;opacity: 0;transform: translate(-50%,-50%);z-index: -1;" onclick="javascript:yesnoCheck();" required name="yesno"  id="yesCheck"  value="yesCheck">
                     <span class="design"></span>
@@ -81,45 +77,53 @@
                     <span class="text">No</span>
                   </label>
                  
-                  
-          
-          
-                
                 </div>
               </div>
             
           
-               <div  class="card-body">
+               <div  class="card-body" style="background-color: rgb(6, 6, 44); position: relative; box-shadow: 2px 2px 20px  rgb(6, 6, 44);">
                <form action="/post_field" method="POST" >
                     
-                    <input type="text" class="form-control"   name="driverName" required id="driverName" placeholder=" Name of the driver (Full names)"/><hr>
-                    
+                    <input type="text" class="form-control"   name="driverName" required id="driverName" placeholder=" Name of the driver (Full names)" title="(e.g. Alex Mwaura)" autofocus autocomplete="off" required pattern="^\w+\s\w+$"/><hr>
+                   
+                    <div id="ifYes" style="display:none">
+                      <input type="text" placeholder="Owner of the vehicle (Full names)" class="form-control" name="owner" id="owner" title="(e.g. Alex Mwaura)" autofocus autocomplete="off" required pattern="^\w+\s\w+$"/> <br>
+                      </div>
+
+
+
                     <input type="number" class="form-control" placeholder=" Enter driver's phone no:"  name="driverNo" required id="driverNo"/><br>
+
+
           
-                    <input type="email" class="form-control" placeholder="Billing Address or Owner Email:" required name="email" id="email"/> <br>
+                    <input type="email" class="form-control" placeholder="Billing Address or Owner Email:" required name="email" id="email"
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" title="(e.g alexmwaura@gmail.com)"
+                    
+                    /> <br>
           
                     <input type="text" class="form-control" placeholder="Model of the vehicle" required name="model" id="model"> <br>
                     
                     <input type="text" class="form-control" placeholder="Company name" required name="company" id="company"/> <br>
                     
-                    <div id="ifYes" style="display:none">
-                    <input type="text" placeholder="Owner of the vehicle (Full names)" class="form-control" name="owner" id="owner"/> <br>
-                    </div>
+                   
                     
           
                     <input type="text" class="form-control" placeholder="Engine Number" required name="engNo" id="engNo"/> <br>
           
-                    <input type="text" class="form-control" placeholder="Enter vehicle regestration number" required name="regNo" id="regNo"/> <br>
+                    <input type="text" class="form-control" placeholder="Enter vehicle regestration number" required name="regNo" id="regNo"
+                    title="(e.g. KCA 1234P)" autofocus autocomplete="off" required pattern="^\w+\s\w+$"
+                    
+                    /> <br>
             
                     
-                    <input type="text" class="form-control" placeholder="What is the vehicle's Mileage" required name="mileage" id="mileage"/> <br>
+                    <input type="number" class="form-control" placeholder="What is the vehicle's Mileage" required name="mileage" id="mileage"/> <br>
                     {% if email%}
                    <input type="hidden"  value="{{email}}" name="useremail" id="useremail">
                    {% endif %}
                    {% if password %}
                    <input type="hidden" value="{{password}}" name="password" id="password">
                       {% endif %}
-                    <input type="submit" class="form-control btn btn-dark col-md-4 light" id="submit" value="Press Me!"/> 
+                    <input type="submit" class="form-control btn btn-success col-md-4 light" id="submit" value="Send"/> 
                     
                     </form> 
                     <footer class="footer">

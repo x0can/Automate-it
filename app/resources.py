@@ -118,6 +118,18 @@ class AllUsers(Resource):
     
     def delete(self):
         return UserModel.delete_all()
+
+class AllVehicles(Resource):
+    def get(self):
+        return Detail.return_all()
+
+    def delete(self):
+        return Detail.delete_all()
+
+class NewVehicle(Resource):
+    def post(self):
+        pass
+
       
 class SecretResource(Resource):
     @jwt_required

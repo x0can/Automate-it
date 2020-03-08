@@ -47,33 +47,44 @@
 
 
 
-    <table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Email</th>
-      <th scope="col">Driver name</th>
-      <th scope="col">Mileage</th>
-      <th scope="col">Owner</th>
-      <th scope="col">Company</th>
-      <!-- <th scope="col"></th>
-      <th scope="col">Engn No</th>
-      <th scope="col">Engn No</th> -->
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>{{context.email}}</td>
-      <td>{{context.driver}}</td>
-      <td>{{context.mileage}}</td>
-      <td>{{context.owner}}</td>
-      <td>{{context.company}}</td>
-    </tr>
-    
+    <div class="container">
+        <div class="card-rows">
+          <div class="card">
+            <div class="card-body">
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Driver name</th>
+                    <th scope="col">Mileage</th>
+                    <th scope="col">Owner</th>
+                    <th scope="col">Company</th>
+                    <!-- <th scope="col"></th>
+                    <th scope="col">Engn No</th>
+                    <th scope="col">Engn No</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>{{context.email}}</td>
+                    <td>{{context.driver}}</td>
+                    <td>{{context.mileage}}</td>
+                    <td>{{context.owner}}</td>
+                    <td>{{context.company}}</td>
+                  </tr>
+                  
+              
+                </tbody>
+              </table>
 
-  </tbody>
-</table>
+            </div>
+
+          </div>
+
+        </div>
+    </div>
 
 <!-- <table class="table">
   <thead class="thead-light">

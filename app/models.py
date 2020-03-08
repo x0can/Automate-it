@@ -18,12 +18,11 @@ class User(db.Model):
     email = db.Column(db.String(255), nullable=False, unique=True)
     pass_secure = db.Column(db.String(255), nullable=False, unique=True)
     username = db.Column(db.String(100), nullable=False)
-    roles = db.Column(db.String(100), nullable=False)
-
-
+    roles = db.Column(db.String(20), nullable=False)
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
+
 
     @staticmethod
     def generate_hash(pass_secure):
@@ -110,7 +109,15 @@ class Detail(db.Model):
         return {'Detail': list(map(lambda j: to_json(j), Detail.query.all()))}
 
 
+    @classmethod
+    def delete_all(cls):
+        try:
+            num_rows_deleted = db.session.query(cls).delete()
+            db.session.commit()
+            return {'message': '{} row(s) deleted'.format(num_rows_deleted)}
 
+        except:
+            return {'message': 'Something went wrong'}
 
 
 
