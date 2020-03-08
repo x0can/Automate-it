@@ -81,7 +81,9 @@ def register_user():
             refresh_token = create_refresh_token(identity=result['email'])
 
             if result['roles']=='attendant':
-                return redirect("index.html")
+                email=result['email']
+                password=result['password']
+                return render_template("index.html",email=email,password=password)
             elif result['roles']!="attendant" and result['roles'] != "mechanic":
                 return render_template("fourOwfour.html")
             else:

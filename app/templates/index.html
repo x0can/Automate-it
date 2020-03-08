@@ -113,10 +113,12 @@
             
                     
                     <input type="text" class="form-control" placeholder="What is the vehicle's Mileage" required name="mileage" id="mileage"/> <br>
-                    
+                    {% if email%}
                    <input type="hidden"  value="{{email}}" name="useremail" id="useremail">
+                   {% endif %}
+                   {% if password %}
                    <input type="hidden" value="{{password}}" name="password" id="password">
-
+                      {% endif %}
                     <input type="submit" class="form-control btn btn-dark col-md-4 light" id="submit" value="Press Me!"/> 
                     
                     </form> 
