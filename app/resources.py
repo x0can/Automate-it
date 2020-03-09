@@ -2,7 +2,7 @@ from flask_restful import Resource, reqparse
 from app.models import User as UserModel
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required,
 jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
-from app.models import RevokeToken,Detail
+from app.models import *
 from flask import Flask, jsonify, render_template, redirect, url_for,request
 
 
@@ -12,6 +12,19 @@ parser.add_argument('email', help = 'This field cannot be blank', required = Tru
 parser.add_argument('username', help = 'This field cannot be blank', required = False)
 parser.add_argument('password', help = 'This field cannot be blank', required = True)
 parser.add_argument('role', help = 'This field cannot be blank', required = False)
+
+
+detail = reqparse.RequestParser()
+detail.add_argument('model',help = 'This field cannot be blank', required = True)
+detail.add_argument('driver_name',help = 'This field cannot be blank', required = True)
+detail.add_argument('owner_name',help = 'This field cannot be blank', required = True)
+detail.add_argument('owner_email',help = 'This field cannot be blank', required = True)
+detail.add_argument('company_name',help = 'This field cannot be blank', required = True)
+detail.add_argument('engine',help = 'This field cannot be blank', required = True)
+detail.add_argument('reg_no',help = 'This field cannot be blank', required = True)
+detail.add_argument('mileage',help = 'This field cannot be blank', required = True)
+detail.add_argument('driver_no',help = 'This field cannot be blank', required = True)
+
 
 class UserRegistration(Resource):
     def post(self):
@@ -39,6 +52,95 @@ class UserRegistration(Resource):
             }
         except:
             return {'message': 'Something went wrong'}, 500
+
+
+class NewCustomer(Resource):
+    @jwt_refresh_token_required    
+    def post(self):
+        data = detail.parse_args()
+        user = parser.parse_args()
+        current_user= UserModel.find_by_email(user['email'])
+        current_vehicle = Vehicle.find_by_reg_no(data['reg_no'],data['engine'])
+        current_customer = Customer.find_by_email(data['owner_email'])
+        # print(current_customer.id)
+       
+        try:            
+            if not current_user:
+                return {
+                    'status': 'failed',
+                    'message': 'User {} with email: {} is not permitted'.format(user['username'], user['email']),
+                }
+            if not current_user.roles=="attendant":
+                return {
+                    'status':'failed',
+                    'message': 'User {} with email: {} is not allowed'.format(user['username'], user['email']),
+                    }
+            
+                        
+            if current_vehicle:
+                return {
+                    'status': 'failed',
+                    'message': 'Vehicle {} with regestration {} already exists'.format(data['model'],data['reg_no'])
+                }
+
+            if current_customer:
+                customer_id = current_customer.id
+                new_vehicle = Vehicle(
+                    model=data['model'],
+                    reg_no=data['reg_no'],
+                    mileage=data['mileage'],
+                    eng_no=data['engine'],
+                    customer_id=customer_id
+                    )
+
+                try:
+                    new_vehicle.save_to_db()
+                    return{
+                            'status':'new vehicle added',
+                            'model':new_vehicle.model,
+                            'reg_no':new_vehicle.reg_no,
+                            'mileage':new_vehicle.mileage,
+                            'eng_no':new_vehicle.eng_no,
+                        }
+                except:
+                    return{
+                        'status':'failed',
+                        'message':'something went wrong'
+                    },500
+            else:
+                
+                new_customer = Customer(
+                    driver_name=data['driver_name'],
+                    driver_no=data['driver_no'],
+                    owner_name=data['owner_name'],
+                    owner_email=data['owner_email'],
+                    company_name=data['company_name'],
+
+                    )
+                new_customer.save_to_db()
+                print(new_customer.id)
+                try:
+                    customer_id=new_customer.id
+                    new_vehicle = Vehicle(
+                            model=data['model'],
+                            reg_no=data['reg_no'],
+                            mileage=data['mileage'],
+                            eng_no=data['engine'],
+                            customer_id=customer_id
+                        )
+                    print(new_vehicle.model)
+                    new_vehicle.save_to_db()
+                    return{
+                            'status':'new customer added',
+                            'driver_name':new_customer.driver_name,
+                            'owner_email':new_customer.owner_email
+                        }
+                
+                except:
+                    return {'message': 'Something went wrong'}, 500
+        except:
+            return {'message': 'Something went wrong'},500    
+            
 
 class UserLogin(Resource):
     def post(self):
@@ -119,16 +221,16 @@ class AllUsers(Resource):
     def delete(self):
         return UserModel.delete_all()
 
-class AllVehicles(Resource):
-    def get(self):
-        return Detail.return_all()
+# class AllVehicles(Resource):
+#     def get(self):
+#         return Detail.return_all()
 
-    def delete(self):
-        return Detail.delete_all()
+#     def delete(self):
+#         return Detail.delete_all()
 
-class NewVehicle(Resource):
-    def post(self):
-        pass
+# class NewVehicle(Resource):
+#     def post(self):
+#         pass
 
       
 class SecretResource(Resource):
